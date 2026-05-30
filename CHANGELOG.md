@@ -5,6 +5,22 @@ All notable changes to the MediaNote extension are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1]
+
+### Changed
+
+- Attachments now live in a **per-note** folder named after the note
+  (`note.md` → `note.attachments/`, beside the note), instead of one
+  `attachments/` folder shared by every note in the directory. The
+  `medianote.attachmentsFolder` setting is now the suffix for that folder
+  (`<note>.<attachmentsFolder>`).
+
+### Fixed
+
+- Renaming a note now also renames its per-note attachments folder
+  (`note.attachments` → `renamed.attachments`) and rewrites every reference to
+  the files inside it, so links stay intact.
+
 ## [0.1.0]
 
 Initial release.

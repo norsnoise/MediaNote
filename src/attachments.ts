@@ -95,14 +95,15 @@ export function withTimestamp(fileName: string, now: Date = new Date()): string 
   return `${stem}-${stamp}${ext || '.png'}`;
 }
 
-// Attachments live next to the note that references them: a sibling
-// `<attachmentsFolder>` directory of the note's parent folder. This means each
-// folder that contains markdown files gets its own attachments folder, so notes
-// stay self-contained when moved.
+// Each note gets its own attachments folder, sitting beside the note in the
+// same directory and named after it: `note.md` → `note.<attachmentsFolder>`
+// (default `note.attachments`). This keeps a note's media self-contained — one
+// folder per note rather than one folder shared by every note in the directory.
 export function attachmentsFolderUri(docUri: vscode.Uri): vscode.Uri {
   const folder = vscode.workspace.getConfiguration('medianote').get<string>('attachmentsFolder', 'attachments');
   const docDir = vscode.Uri.joinPath(docUri, '..');
-  return folder ? vscode.Uri.joinPath(docDir, folder) : docDir;
+  const noteName = path.basename(docUri.fsPath, path.extname(docUri.fsPath));
+  return folder ? vscode.Uri.joinPath(docDir, `${noteName}.${folder}`) : docDir;
 }
 
 async function exists(uri: vscode.Uri): Promise<boolean> {

@@ -4,7 +4,7 @@ The "hello world" of computer vision: given a 28×28 grayscale image of a hand-w
 
 The standard benchmark is **MNIST** ([LeCun, Cortes & Burges, 1998](http://yann.lecun.com/exdb/mnist/)): 60,000 training and 10,000 test images, drawn from US Census Bureau employees and high-school students, centered and size-normalized. State-of-the-art on MNIST has been >99.7% test accuracy for over a decade; the value of the dataset now is as a fast sanity check, not as a research target.
 
-![Ten MNIST classes, one stylized tile each](attachments/digit-classification/mnist-sample.svg)
+![Ten MNIST classes, one stylized tile each](digit-classification.attachments/mnist-sample.svg)
 
 ## Problem setup
 
@@ -20,7 +20,7 @@ Training fits $\theta$ to minimize the empirical risk under cross-entropy loss; 
 
 The smallest model that does respectably well is a two-layer multi-layer perceptron (MLP). It treats each pixel as a feature and learns a stack of affine + nonlinearity transforms.
 
-![MLP architecture: 784 → 128 (ReLU) → 64 (ReLU) → 10 (softmax)](attachments/digit-classification/mlp-architecture.svg)
+![MLP architecture: 784 → 128 (ReLU) → 64 (ReLU) → 10 (softmax)](digit-classification.attachments/mlp-architecture.svg)
 
 Layer-wise:
 
@@ -144,7 +144,7 @@ On a laptop CPU this takes a few minutes and reaches about **97.8%** test accura
 
 The MLP throws away the fact that pixels have *neighbors*. A convolutional net keeps that geometry: each convolutional filter is a small set of weights that slides across the image and looks for a local pattern (an edge, a corner, a stroke). Stacking conv layers builds up a hierarchy of features — early layers fire on simple edges, later layers on digit-shaped strokes.
 
-![A small CNN: two conv+pool blocks then a fully-connected head](attachments/digit-classification/cnn-architecture.svg)
+![A small CNN: two conv+pool blocks then a fully-connected head](digit-classification.attachments/cnn-architecture.svg)
 
 For an input feature map $x \in \mathbb{R}^{C_\text{in} \times H \times W}$ and a kernel $k \in \mathbb{R}^{C_\text{out} \times C_\text{in} \times K \times K}$, a 2-D convolution (technically cross-correlation) computes
 

@@ -2,7 +2,7 @@
   "name": "medianote",
   "displayName": "MediaNote",
   "description": "Obsidian-style note-taking for VS Code: wiki-links, backlinks, tags.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "norsnoise",
   "license": "MIT",
   "icon": "media/icon.png",
@@ -198,7 +198,7 @@
         "medianote.attachmentsFolder": {
           "type": "string",
           "default": "attachments",
-          "description": "Folder name for attachments such as audio, video, and images. Created next to the note that references them — so a note at `foo/bar/note.md` uses `foo/bar/<attachmentsFolder>/`. Empty stores attachments alongside the note."
+          "description": "Suffix for each note's own attachments folder, holding audio, video, and images. Each note gets its own folder beside it, named `<note>.<attachmentsFolder>` — so a note at `foo/bar/note.md` uses `foo/bar/note.attachments/`. Empty stores attachments alongside the note."
         },
         "medianote.previewFont": {
           "type": "string",

@@ -4,7 +4,7 @@ PageRank is the link-analysis algorithm that bootstrapped Google. It assigns eve
 
 Originally written up by Larry Page and Sergey Brin while at Stanford, with Rajeev Motwani and Terry Winograd. The 1999 tech report ([Page et al., 1999](http://ilpubs.stanford.edu:8090/422/)) is still the most readable source.
 
-![PageRank example with percentages on nodes](attachments/pageranks-example.svg)
+![PageRank example with percentages on nodes](pagerank.attachments/pageranks-example.svg)
 
 > Canonical illustration (Wikipedia, public domain): node B has a high score not because many pages link to it, but because **one important page (C) is its only inbound link**, and C in turn collects votes from a large hub.
 
@@ -17,7 +17,7 @@ Two consequences fall out of that definition:
 1. **Quality matters more than quantity.** A link from a page with PR $0.9$ is worth more than ten links from pages with PR $0.001$.
 2. **Out-degree dilutes.** A page that links to 100 things only passes $1/100$ of its weight to each. So linking promiscuously is *not* a way to boost everyone you link to.
 
-![Random surfer converging on PageRank values](attachments/page-rank-animation.gif)
+![Random surfer converging on PageRank values](pagerank.attachments/page-rank-animation.gif)
 
 ## The formula
 

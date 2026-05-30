@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import { NoteIndex } from './noteIndex';
+import { attachmentsFolderUri } from './attachments';
 
 const FENCE_RE = /```[\s\S]*?```/g;
 const EMBED_WIKI_RE = /!\[\[([^\]\n|#]+)((?:#[^\]\n|]*)?(?:\|[^\]\n]*)?)\]\]/g;
@@ -142,6 +143,65 @@ async function collectPathRenames(
   }
 }
 
+async function isDir(uri: vscode.Uri): Promise<boolean> {
+  try {
+    return (await vscode.workspace.fs.stat(uri)).type === vscode.FileType.Directory;
+  } catch {
+    return false;
+  }
+}
+
+async function listFilesRecursive(dir: vscode.Uri): Promise<vscode.Uri[]> {
+  const out: vscode.Uri[] = [];
+  let entries: [string, vscode.FileType][];
+  try {
+    entries = await vscode.workspace.fs.readDirectory(dir);
+  } catch {
+    return out;
+  }
+  for (const [name, type] of entries) {
+    const child = vscode.Uri.joinPath(dir, name);
+    if (type === vscode.FileType.Directory) {
+      out.push(...(await listFilesRecursive(child)));
+    } else {
+      out.push(child);
+    }
+  }
+  return out;
+}
+
+// When a note is renamed, its per-note attachments folder (`note.attachments`,
+// a sibling of the note — see attachmentsFolderUri) is renamed to match the new
+// note name, and every reference to a file inside it is rewritten to the new
+// path. Skipped when the folder doesn't exist, when attachments are stored
+// alongside the note (empty `attachmentsFolder` → folder === the note's dir), or
+// when something already occupies the new folder name.
+async function collectAttachmentsFolderRename(
+  oldUri: vscode.Uri,
+  newUri: vscode.Uri,
+  index: NoteIndex,
+  edit: vscode.WorkspaceEdit,
+): Promise<void> {
+  const oldDir = attachmentsFolderUri(oldUri);
+  const newDir = attachmentsFolderUri(newUri);
+  if (oldDir.fsPath === newDir.fsPath) return; // empty attachmentsFolder → nothing dedicated to rename
+  if (oldDir.fsPath === path.dirname(oldUri.fsPath)) return; // safety: never rename the note's own directory
+  if (!(await isDir(oldDir))) return;
+  if (await isDir(newDir)) return; // name already taken — leave links pointing at the existing folder
+
+  const files = await listFilesRecursive(oldDir);
+  await Promise.all(
+    files.map(f => {
+      const rel = path.relative(oldDir.fsPath, f.fsPath);
+      const newFsPath = path.join(newDir.fsPath, rel);
+      return Promise.all(
+        index.all().map(n => collectPathRenames(n.uri, f.fsPath, newFsPath, edit)),
+      );
+    }),
+  );
+  edit.renameFile(oldDir, newDir);
+}
+
 async function buildRenameEdit(
   files: ReadonlyArray<{ oldUri: vscode.Uri; newUri: vscode.Uri }>,
   index: NoteIndex,
@@ -160,6 +220,7 @@ async function buildRenameEdit(
         await Promise.all(
           referrers.map(r => collectWikiLinkRenames(r.uri, oldName, newName, edit)),
         );
+        await collectAttachmentsFolderRename(oldUri, newUri, index, edit);
       }
     }
 

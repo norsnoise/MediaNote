@@ -2,13 +2,13 @@
 
 The **blue whale** (*Balaenoptera musculus*) is the largest animal known to have ever existed — larger than any dinosaur. An adult can stretch past 30 m and weigh up to 200 t, eats almost nothing but krill, and was hunted to the brink of extinction in the 20th century before recovering modestly under international protection.
 
-![Blue whale at the surface, NOAA Photo Library](attachments/blue-whale/blue-whale-noaa.jpg)
+![Blue whale at the surface, NOAA Photo Library](blue-whale.attachments/blue-whale-noaa.jpg)
 
 ## How big, really
 
 Numbers stop being intuitive at this scale, so a comparison helps:
 
-![Size comparison: blue whale vs. human diver](attachments/blue-whale/blue-whale-size.svg)
+![Size comparison: blue whale vs. human diver](blue-whale.attachments/blue-whale-size.svg)
 
 - **Length** — typical adults are 24–30 m; the longest confirmed individual was 33 m (108 ft). For reference, that's longer than a basketball court.
 - **Mass** — up to ~200 metric tons. A large male African elephant weighs ~6 t, so one blue whale ≈ 30+ elephants.
@@ -18,7 +18,7 @@ Numbers stop being intuitive at this scale, so a comparison helps:
 
 ## Anatomy and biology
 
-![Blue whale schematic](attachments/blue-whale/blue-whale-bw.jpg)
+![Blue whale schematic](blue-whale.attachments/blue-whale-bw.jpg)
 
 Blue whales are baleen whales (suborder Mysticeti). Instead of teeth, they have 270–395 plates of keratin **baleen** hanging from the upper jaw, forming a sieve. They are **lunge feeders**: they accelerate into a krill swarm with mouth agape, balloon their pleated throat pouch to engulf 70+ tonnes of water, then push the water out through the baleen, trapping the krill inside.
 
