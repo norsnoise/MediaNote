@@ -1,0 +1,8 @@
+out/
+node_modules/
+*.vsix
+.vscode-test/
+
+# Generated at runtime from the medianote.previewFont/previewCodeFont settings
+# (see writePreviewStylesheet in src/extension.ts) — not source.
+media/preview.css

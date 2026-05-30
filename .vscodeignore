@@ -1,0 +1,18 @@
+.vscode/**
+src/**
+examples/**
+.claude/**
+CLAUDE.md
+tsconfig.json
+package-lock.json
+.gitignore
+.vscodeignore
+**/*.map
+**/*.ts
+
+# Keep node_modules/katex (the only runtime dep), but trim the parts we never
+# read: loadInlineKatexCss() inlines only dist/katex.min.css + dist/fonts/*.woff2.
+node_modules/katex/dist/fonts/*.woff
+node_modules/katex/dist/fonts/*.ttf
+node_modules/katex/src/**
+node_modules/katex/contrib/**

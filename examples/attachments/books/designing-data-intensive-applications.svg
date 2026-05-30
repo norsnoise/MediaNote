@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 180">
+  <!-- book body -->
+  <rect x="8" y="6" width="124" height="168" rx="4" fill="#f4ead5" stroke="#5a3a1a" stroke-width="2"/>
+  <!-- top + bottom bands (O'Reilly style) -->
+  <rect x="8" y="6" width="124" height="14" fill="#5a3a1a"/>
+  <rect x="8" y="160" width="124" height="14" fill="#5a3a1a"/>
+  <!-- spine highlight -->
+  <rect x="8" y="6" width="6" height="168" fill="#3d2710"/>
+  <!-- cartoon boar -->
+  <g transform="translate(28,42)">
+    <!-- body -->
+    <ellipse cx="40" cy="40" rx="34" ry="20" fill="#6b4a2b" stroke="#3d2710" stroke-width="1.5"/>
+    <!-- head -->
+    <ellipse cx="68" cy="34" rx="16" ry="13" fill="#6b4a2b" stroke="#3d2710" stroke-width="1.5"/>
+    <!-- snout -->
+    <ellipse cx="80" cy="36" rx="6" ry="4" fill="#8b6a4b" stroke="#3d2710" stroke-width="1.2"/>
+    <circle cx="79" cy="35" r="0.8" fill="#3d2710"/>
+    <circle cx="82" cy="35" r="0.8" fill="#3d2710"/>
+    <!-- eye -->
+    <circle cx="70" cy="30" r="1.5" fill="#3d2710"/>
+    <!-- ear -->
+    <path d="M60 22 L64 16 L68 24 Z" fill="#6b4a2b" stroke="#3d2710" stroke-width="1.2"/>
+    <!-- tusks -->
+    <path d="M76 38 L74 42 L75 38 Z" fill="#f4ead5" stroke="#3d2710" stroke-width="0.8"/>
+    <!-- mane bristles -->
+    <path d="M40 22 L42 14 M48 21 L50 13 M56 22 L58 15" stroke="#3d2710" stroke-width="1.4" fill="none"/>
+    <!-- legs -->
+    <rect x="22" y="56" width="5" height="12" fill="#6b4a2b" stroke="#3d2710" stroke-width="1.2"/>
+    <rect x="34" y="56" width="5" height="12" fill="#6b4a2b" stroke="#3d2710" stroke-width="1.2"/>
+    <rect x="50" y="56" width="5" height="12" fill="#6b4a2b" stroke="#3d2710" stroke-width="1.2"/>
+    <rect x="62" y="56" width="5" height="12" fill="#6b4a2b" stroke="#3d2710" stroke-width="1.2"/>
+    <!-- tail -->
+    <path d="M6 38 Q0 36 2 30" stroke="#3d2710" stroke-width="1.5" fill="none"/>
+  </g>
+  <!-- title bands text -->
+  <text x="70" y="16" text-anchor="middle" font-family="Georgia, serif" font-size="7" font-weight="bold" fill="#f4ead5">DESIGNING DATA-INTENSIVE APPS</text>
+  <text x="70" y="170" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#f4ead5">Martin Kleppmann</text>
+  <!-- subtitle -->
+  <text x="70" y="130" text-anchor="middle" font-family="Georgia, serif" font-size="6" fill="#5a3a1a">RELIABLE · SCALABLE · MAINTAINABLE</text>
+</svg>

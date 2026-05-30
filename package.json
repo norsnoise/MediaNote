@@ -1,0 +1,241 @@
+{
+  "name": "medianote",
+  "displayName": "MediaNote",
+  "description": "Obsidian-style note-taking for VS Code: wiki-links, backlinks, tags.",
+  "version": "0.1.0",
+  "publisher": "norsnoise",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/norsnoise/MediaNote.git"
+  },
+  "homepage": "https://github.com/norsnoise/MediaNote#readme",
+  "bugs": {
+    "url": "https://github.com/norsnoise/MediaNote/issues"
+  },
+  "engines": {
+    "vscode": "^1.97.0"
+  },
+  "categories": [
+    "Notebooks",
+    "Other"
+  ],
+  "keywords": [
+    "markdown",
+    "notes",
+    "note-taking",
+    "wiki-links",
+    "backlinks",
+    "obsidian",
+    "knowledge base",
+    "attachments",
+    "preview",
+    "pdf export"
+  ],
+  "activationEvents": [
+    "onLanguage:markdown",
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "medianote.newNote",
+        "title": "MediaNote: New Note",
+        "icon": "$(add)"
+      },
+      {
+        "command": "medianote.createFromLink",
+        "title": "MediaNote: Create Note From Link"
+      },
+      {
+        "command": "medianote.openTagFilter",
+        "title": "MediaNote: Search Notes by Tag"
+      },
+      {
+        "command": "medianote.refreshIndex",
+        "title": "MediaNote: Refresh Index",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "medianote.search",
+        "title": "MediaNote: Search Notes"
+      },
+      {
+        "command": "medianote.insertLink",
+        "title": "MediaNote: Insert Link"
+      },
+      {
+        "command": "medianote.openSettings",
+        "title": "MediaNote: Open Settings",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "medianote.exportNote",
+        "title": "MediaNote: Export Note (HTML / PDF)",
+        "icon": "$(export)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "medianote",
+          "title": "MediaNote",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "medianote": [
+        {
+          "id": "medianote.outline",
+          "name": "Notes"
+        },
+        {
+          "id": "medianote.backlinks",
+          "name": "Backlinks"
+        },
+        {
+          "id": "medianote.tags",
+          "name": "Tags"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "medianote.newNote",
+          "when": "view == medianote.outline",
+          "group": "navigation"
+        },
+        {
+          "command": "medianote.refreshIndex",
+          "when": "view == medianote.outline",
+          "group": "navigation"
+        },
+        {
+          "command": "medianote.openSettings",
+          "when": "view == medianote.outline",
+          "group": "navigation@99"
+        },
+        {
+          "command": "medianote.refreshIndex",
+          "when": "view == medianote.backlinks",
+          "group": "navigation"
+        },
+        {
+          "command": "medianote.refreshIndex",
+          "when": "view == medianote.tags",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "medianote.createFromLink",
+          "when": "false"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "medianote.exportNote",
+          "when": "resourceLangId == markdown",
+          "group": "navigation@10"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "medianote.exportNote",
+          "when": "resourceLangId == markdown",
+          "group": "medianote@1"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "medianote.exportNote",
+          "when": "resourceExtname == .md",
+          "group": "medianote@1"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "medianote.newNote",
+        "key": "ctrl+alt+n",
+        "mac": "cmd+alt+n"
+      },
+      {
+        "command": "medianote.search",
+        "key": "ctrl+alt+f",
+        "mac": "cmd+alt+f"
+      },
+      {
+        "command": "medianote.insertLink",
+        "key": "ctrl+alt+l",
+        "mac": "cmd+alt+l",
+        "when": "editorLangId == markdown"
+      }
+    ],
+    "configuration": {
+      "title": "MediaNote",
+      "properties": {
+        "medianote.newNoteFolder": {
+          "type": "string",
+          "default": "",
+          "description": "Default folder for new notes (relative to workspace root). Empty for the workspace root."
+        },
+        "medianote.tableOfContents": {
+          "type": "boolean",
+          "default": true,
+          "order": 6,
+          "description": "Render a table of contents in the Markdown preview wherever a note has a standalone `\\tableofcontents` line, linking to its level-2+ headings. The directive stays in the source — the note file is never modified. Disable to leave `\\tableofcontents` as plain text."
+        },
+        "medianote.exclude": {
+          "type": "string",
+          "default": "**/node_modules/**",
+          "description": "Glob pattern of files to exclude from the note index."
+        },
+        "medianote.attachmentsFolder": {
+          "type": "string",
+          "default": "attachments",
+          "description": "Folder name for attachments such as audio, video, and images. Created next to the note that references them — so a note at `foo/bar/note.md` uses `foo/bar/<attachmentsFolder>/`. Empty stores attachments alongside the note."
+        },
+        "medianote.previewFont": {
+          "type": "string",
+          "default": "'Times New Roman', Times, serif",
+          "order": 10,
+          "description": "Font family used in the Markdown preview (e.g. \"Iosevka, Menlo, monospace\"). Empty to use VS Code's default."
+        },
+        "medianote.previewCodeFont": {
+          "type": "string",
+          "default": "'JetBrains Mono', Consolas, monospace",
+          "order": 11,
+          "description": "Font family used for code and code blocks in the Markdown preview (e.g. \"'JetBrains Mono', Consolas, monospace\"). Empty to use VS Code's default."
+        },
+        "medianote.exportPdfBrowserPath": {
+          "type": "string",
+          "default": "",
+          "order": 20,
+          "description": "Absolute path to a Chrome/Chromium/Edge binary used for PDF export. Empty to auto-detect common locations."
+        }
+      }
+    },
+    "markdown.markdownItPlugins": true,
+    "markdown.previewStyles": [
+      "./media/preview.css"
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.97.0",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "katex": "^0.16.47"
+  }
+}
